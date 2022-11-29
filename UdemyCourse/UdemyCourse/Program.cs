@@ -8,7 +8,7 @@ class Program
     {
         int[] numbers = new[] { 1, 2, 5, 7, 11, 16, 18, 24, 29, 40, 50, 55, 69, 82, 90 };
 
-        var binaryIndex = Search.BinarySearch(numbers, 40);
+        var binaryIndex = Search.BinarySearchRecursive(numbers, 40, 0, numbers.Length - 1);
 
         Console.WriteLine("Index: " + binaryIndex.ToString());
 
@@ -37,7 +37,7 @@ static class Search
 
     /// <returns>The index of the item in the array</returns>
     /// <param name="items">Sorted array</param>
-    public static int BinarySearch(int[] items, int key)
+    public static int BinarySearchLinear(int[] items, int key)
     {
         Console.WriteLine("BinarySearch");
 
@@ -64,6 +64,32 @@ static class Search
         }
 
         return -1;
+    }
+
+    /// <returns>The index of the item in the array</returns>
+    /// <param name="items">Sorted array</param>
+    public static int BinarySearchRecursive(int[] items, int key, int left, int right)
+    {
+        if (left > right)
+        {
+            return -1;
+        }
+
+        int index = (int) Math.Floor((decimal) (left + right) / 2);
+        int valueInArray = items[index];
+
+        if (key == valueInArray)
+        {
+            return index;
+        }
+        else if (key < valueInArray)
+        {
+            return BinarySearchRecursive(items, key, left, index - 1);
+        }
+        else
+        {
+            return BinarySearchRecursive(items, key, index + 1, right);
+        }
     }
 }
 
