@@ -1,25 +1,57 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
+using UdemyCourse.Collections;
+using UdemyCourse.Collections.Extensions;
 
 namespace UdemyCourse;
 
-class Program
+[ExcludeFromCodeCoverage]
+internal class Program
 {
     static void Main(string[] args)
     {
-        int[] numbers = new[] { 1, 2, 5, 7, 11, 16, 18, 24, 29, 40, 50, 55, 69, 82, 90 };
-
-        var binaryIndex = Search.BinarySearchRecursive(numbers, 40, 0, numbers.Length - 1);
-
-        Console.WriteLine("Index: " + binaryIndex.ToString());
-
-        while (Console.ReadLine() != "ok")
+        do
         {
             Console.WriteLine("Enter 'ok' to exit the program");
+        } while (Console.ReadLine() != "ok");
+    }
+
+    static void ShowLinkedListDemo()
+    {
+        EnumerableLinkedList<int> list = new();
+
+        for (int i = 0; i < 5; i++)
+        {
+            list.AddLast(i);
+        }
+
+        list.AddFirst(9);
+        list.AddFirst(7);
+        list.AddLast(99);
+
+        foreach (int value in list)
+        {
+            Console.WriteLine("Value: " + value.ToString());
+        }
+
+        Console.WriteLine("***");
+
+        foreach (int value in list.ToList ())
+        {
+            Console.WriteLine("Value: " + value);
+        }
+
+        Console.WriteLine("***");
+
+        foreach (int value in list.ToArray ())
+        {
+            Console.WriteLine("Value: " + value);
         }
     }
 }
 
-static class Search
+[ExcludeFromCodeCoverage]
+internal static class Search
 {
     /// <returns>The index of the item in the array</returns>
     public static int LinearSearch(int[] items, int value)
@@ -93,7 +125,8 @@ static class Search
     }
 }
 
-class Recursion
+[ExcludeFromCodeCoverage]
+internal class Recursion
 {
     public int Sum(int n)
     {
